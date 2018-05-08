@@ -18,10 +18,6 @@ public class MyApp {
         ArrayList<Double> lista;
         lista = reader.readDouble("TestData.txt");
 
-        for (int i = 0;i<lista.size();i++) {
-            System.out.println(lista.get(i));
-        }
-
 
         double[][] points = new double[5][5];
         points[0][0] = 1; //x pierwszego punktu
@@ -29,10 +25,15 @@ public class MyApp {
         points[1][0] = 3; //x drugiego punktu
         points[1][1] = 4; //y drugiego punktu
 
-        ArrayList<Point> pts = GeneratePoints.Generate(Figure.KWADRAT, 150);
+        ArrayList<Point> pts = GeneratePoints.Generate(Figure.OKRAG, 1000);
 
+        double[][] ppp = new double[1000][1000];
+        for (int i =0;i<1000;i++){
+            ppp[i][0] = pts.get(i).x;
+            ppp[i][1] = pts.get(i).y;
+        }
 
-
+        DrawPlot.draw(ppp,5);
 
     }
 }

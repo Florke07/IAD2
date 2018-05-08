@@ -32,8 +32,8 @@ public class GeneratePoints {
                 double distance;
 
                 while (iterator<count) {
-                    newPoint = new Point((rng.nextDouble()*2),(rng.nextDouble()*2));
-                    distance = dst(newPoint, center);
+                    newPoint = new Point((rng.nextDouble()*4)-2,(rng.nextDouble()*4)-2);
+                    distance = dst(center, newPoint);
 
                     if (distance <= radius) {
                         points.add(newPoint);
@@ -50,7 +50,7 @@ public class GeneratePoints {
 
     private static double dst(Point A, Point B) {
         double ans;
-        ans = Math.sqrt(((B.x-A.x)*(B.x-A.x))+((B.y-A.y)*(B.y-A.y)));
+        ans = Math.sqrt((Math.pow((B.x-A.x),2))+(Math.pow((B.y-A.y),2)));
         return ans;
     }
 }

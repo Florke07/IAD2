@@ -35,10 +35,8 @@ public class DrawPlot {
         DataSetPlot s1 = new DataSetPlot(args1);
         p.addPlot(s1);
         p.set("grid","");
-        p.getAxis("x").setBoundaries(0,EPOKI);
-        p.getAxis("y");
-        p.plot();
-        p.addPlot(s1);
+        p.getAxis("x").setBoundaries(-7,7);
+        p.getAxis("y").setBoundaries(-5,5);
         p.plot();
     }
 }
