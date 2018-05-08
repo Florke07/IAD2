@@ -2,5 +2,6 @@ package renerator;
 
 public enum Figure {
     KWADRAT,
-    TROJKAT
+    TROJKAT,
+    OKRAG
 }

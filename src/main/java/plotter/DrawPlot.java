@@ -36,7 +36,9 @@ public class DrawPlot {
         p.addPlot(s1);
         p.set("grid","");
         p.getAxis("x").setBoundaries(0,EPOKI);
-        p.getAxis("y").setBoundaries(0,0.6);
+        p.getAxis("y");
+        p.plot();
+        p.addPlot(s1);
         p.plot();
     }
 }
