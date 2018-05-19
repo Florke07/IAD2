@@ -13,4 +13,8 @@ public class Point {
         x = 0;
         y = 0;
     }
+
+    public double distance(Point p) {
+        return Math.sqrt(Math.pow(x - p.x, 2)+Math.pow(y - p.y, 2));
+    }
 }

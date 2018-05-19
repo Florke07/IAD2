@@ -23,6 +23,10 @@ public class GeneratePoints {
                 }
                 break;
             case TROJKAT:
+                Point t1 = new Point(2,0);
+                Point t2 = new Point(-2,0);
+                Point t3 = new Point(0,2);
+
                 break;
             case OKRAG:
                 int radius = 2;
