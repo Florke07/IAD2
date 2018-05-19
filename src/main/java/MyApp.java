@@ -25,7 +25,7 @@ public class MyApp {
         points[1][0] = 3; //x drugiego punktu
         points[1][1] = 4; //y drugiego punktu
 
-        ArrayList<Point> pts = GeneratePoints.Generate(Figure.OKRAG, 1000);
+        ArrayList<Point> pts = GeneratePoints.Generate(Figure.KWADRAT, 1000);
 
         double[][] ppp = new double[1000][1000];
         for (int i =0;i<1000;i++){
