@@ -32,8 +32,10 @@ public class MyApp {
         //Point c = new Point(2,3);
         //GeneratePoints gen = new GeneratePoints(Figure.OKRAG, ile, 5, c);
 
-        pts = Generate.circled(5,500,-50,50, 5);
-        ile = 5*500;
+        int numOfCentre = 3;
+        int numOfPoints = 50;
+        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 5);
+        ile = numOfCentre*numOfPoints;
         double[][] ppp = new double[ile][ile];
         for (int i =0;i<ile;i++){
             ppp[i][0] = pts.get(i).x;
@@ -43,30 +45,32 @@ public class MyApp {
         //DrawPlot.draw(ppp,5);
 
         int epok = 100;
-        NetworkKonoher nkh = new NetworkKonoher(2,5, epok);
+        NetworkKonoher nkh = new NetworkKonoher(2,numOfCentre, epok*epok);
 
-        double[][] przed = new double[5][2];
-        for (int i=0;i<5;i++) {
+        double[][] przed = new double[numOfCentre][2];
+        for (int i=0;i<numOfCentre;i++) {
             przed[i][0] = nkh.neurons.get(i).weights.get(0);
             przed[i][1] = nkh.neurons.get(i).weights.get(1);
         }
 
         //DrawPlot.draw(ppp, przed);
+        for (int j=0;j<epok;j++) {
+            for (int i=0;i<(pts.size());i++) {
+                ArrayList<Double> xy = new ArrayList<>();
+                xy.add(pts.get(i).x);
+                xy.add(pts.get(i).y);
+                nkh.work(xy);
+            }
 
-        for (int i=0;i<(pts.size());i++) {
-            ArrayList<Double> xy = new ArrayList<>();
-            xy.add(pts.get(i).x);
-            xy.add(pts.get(i).y);
-            nkh.work(xy);
         }
 
-        double[][] po = new double[5][2];
-        for (int i=0;i<5;i++) {
+        double[][] po = new double[numOfCentre][2];
+        for (int i=0;i<numOfCentre;i++) {
             po[i][0] = nkh.neurons.get(i).weights.get(0);
             po[i][1] = nkh.neurons.get(i).weights.get(1);
         }
 
-
+        DrawPlot.draw(ppp,przed);
         DrawPlot.draw(ppp,przed,po);
     }
 }
