@@ -34,7 +34,7 @@ public class NetworkKonoher {
 
     }
     private double funkcjaSasiedztwa(Neuron n){
-        return Math.exp(Math.pow(n.distanceFromNeuron(winner),2)/2*Math.pow(lambdaOdWieku(),2));
+        return Math.exp(-Math.pow(n.distanceFromNeuron(winner),2)/(2*Math.pow(lambdaOdWieku(),2)));
     }
     private double lambdaOdWieku(){
         return lambdaMax*Math.pow((lambdaMin/lambdaMax),(wiek/wiekMax));
