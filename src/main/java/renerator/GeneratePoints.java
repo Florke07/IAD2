@@ -7,12 +7,20 @@ import java.util.Random;
 
 public class GeneratePoints {
 
+    private Figure figure;
+    private int numbersOfPointsInFigure;
+
+    public GeneratePoints(Figure figure, int numbersOfPointsInFigure) {
+        this.figure = figure;
+        this.numbersOfPointsInFigure = numbersOfPointsInFigure;
+    }
+
     public static ArrayList<Point> Generate(Figure fig, int count){
         Random rng = new Random();
         ArrayList<Point> points = new ArrayList<>();
 
         switch (fig){
-            case KWADRAT:
+            case KWADRAT://todo ruchome punkty
                 Point p1 = new Point(1,1);
                 Point p2 = new Point(5,1);
                 Point p3 = new Point(5,5);
