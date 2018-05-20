@@ -39,4 +39,15 @@ public class DrawPlot {
         p.getAxis("y").setBoundaries(-50,50);
         p.plot();
     }
+
+    public static void draw (double[][] args1, double[][] args2, double[][] args3) {
+        JavaPlot p = new JavaPlot();
+        DataSetPlot s1 = new DataSetPlot(args1);
+        p.addPlot(s1);
+        DataSetPlot s2 = new DataSetPlot(args2);
+        p.addPlot(s2);
+        DataSetPlot s3 = new DataSetPlot(args3);
+        p.addPlot(s3);
+        p.plot();
+    }
 }

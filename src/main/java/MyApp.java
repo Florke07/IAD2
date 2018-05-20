@@ -4,6 +4,7 @@ import com.panayotis.gnuplot.utils.Debug;
 import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
+import network.NetworkKonoher;
 import plotter.DrawPlot;
 import renerator.Figure;
 import renerator.Generate;
@@ -39,7 +40,33 @@ public class MyApp {
             ppp[i][1] = pts.get(i).y;
         }
 
-        DrawPlot.draw(ppp,5);
+        //DrawPlot.draw(ppp,5);
 
+        int epok = 100;
+        NetworkKonoher nkh = new NetworkKonoher(2,5, epok);
+
+        double[][] przed = new double[5][2];
+        for (int i=0;i<5;i++) {
+            przed[i][0] = nkh.neurons.get(i).weights.get(0);
+            przed[i][1] = nkh.neurons.get(i).weights.get(1);
+        }
+
+        //DrawPlot.draw(ppp, przed);
+
+        for (int i=0;i<(pts.size());i++) {
+            ArrayList<Double> xy = new ArrayList<>();
+            xy.add(pts.get(i).x);
+            xy.add(pts.get(i).y);
+            nkh.work(xy);
+        }
+
+        double[][] po = new double[5][2];
+        for (int i=0;i<5;i++) {
+            po[i][0] = nkh.neurons.get(i).weights.get(0);
+            po[i][1] = nkh.neurons.get(i).weights.get(1);
+        }
+
+
+        DrawPlot.draw(ppp,przed,po);
     }
 }

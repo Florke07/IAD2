@@ -4,8 +4,8 @@ package network;
 import java.util.ArrayList;
 import java.util.Random;
 
-class Neuron implements Comparable<Neuron> {
-    ArrayList<Double> weights;
+public class Neuron implements Comparable<Neuron> {
+    public ArrayList<Double> weights;
     public double learningRateMax;
     public double learningRate;
     public double learningRateMin;
@@ -16,7 +16,7 @@ class Neuron implements Comparable<Neuron> {
         Random random = new Random();
         weights = new ArrayList<Double>();
         for(int i = 0;i < numberOfInputs; i++){
-            weights.add(random.nextDouble());
+            weights.add((random.nextDouble()*100)-50);
         }
         learningRateMin = 0.03;
         do{

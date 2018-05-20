@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class NetworkKonoher {
-    private ArrayList<Neuron> neurons = new ArrayList<>();
+    public ArrayList<Neuron> neurons = new ArrayList<>();
     private int numberOfInputs;
     private double lambdaMax;
     private double lambdaMin;
