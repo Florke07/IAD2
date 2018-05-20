@@ -4,6 +4,7 @@ import com.panayotis.gnuplot.utils.Debug;
 import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
+import network.NetworkGN;
 import network.NetworkKonoher;
 import plotter.DrawPlot;
 import renerator.Figure;

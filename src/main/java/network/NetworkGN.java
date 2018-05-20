@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class NetworkGN {
-    private ArrayList<Neuron> neurons = new ArrayList<Neuron>();
+    public ArrayList<Neuron> neurons = new ArrayList<Neuron>();
     private int numberOfInputs;
     private double lambdaMax;
     private double lambdaMin;
-    private int wiek;
+    public int wiek;
     private int wiekMax;
     public NetworkGN(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
         for(int i = 0; i < numberOfNeurons;i++){
