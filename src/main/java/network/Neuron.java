@@ -30,6 +30,14 @@ class Neuron implements Comparable<Neuron> {
         }
         distance = Math.sqrt(distance);
     }
+    double distanceFromNeuron(Neuron n){
+        double tmp = 0;
+        for(int i = 0;i < weights.size();i++){
+            tmp += Math.pow(weights.get(i)-n.weights.get(i),2);
+        }
+        tmp = Math.sqrt(tmp);
+        return tmp;
+    }
 
     @Override
     public int compareTo(Neuron o) {
