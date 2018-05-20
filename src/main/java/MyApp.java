@@ -45,7 +45,7 @@ public class MyApp {
         //DrawPlot.draw(ppp,5);
 
         int epok = 100;
-        NetworkKonoher nkh = new NetworkKonoher(2,numOfCentre, epok*epok);
+        NetworkKonoher nkh = new NetworkKonoher(2,numOfCentre, epok);
 
         double[][] przed = new double[numOfCentre][2];
         for (int i=0;i<numOfCentre;i++) {
@@ -61,6 +61,7 @@ public class MyApp {
                 xy.add(pts.get(i).y);
                 nkh.work(xy);
             }
+            nkh.wiek ++;
 
         }
 

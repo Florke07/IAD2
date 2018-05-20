@@ -8,7 +8,7 @@ public class NetworkKonoher {
     private int numberOfInputs;
     private double lambdaMax;
     private double lambdaMin;
-    private int wiek;
+    public int wiek;
     private int wiekMax;
     Neuron winner;
 
@@ -30,7 +30,6 @@ public class NetworkKonoher {
                 i.weights.set(j,(i.weights.get(j)+learningRateOdWieku(i)*funkcjaSasiedztwa(i)*(in.get(j)-i.weights.get(j))));
             }
         }
-        wiek++;
 
     }
     private double funkcjaSasiedztwa(Neuron n){
