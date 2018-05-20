@@ -15,6 +15,10 @@ public class Neuron {
         rng = new Random();
         weightX = rng.nextDouble();
         weightY = rng.nextDouble();
+
+        inputX = 0;
+        inputY = 0;
+        result = 0;
     }
 
     public void setInputs(double x, double y) {
@@ -23,11 +27,7 @@ public class Neuron {
     }
 
     public double proceed(double x, double y) {
-        inputY = y;
-        inputX = x;
-
-        result = (inputX * weightX) + (inputY * weightY);
-
+        //todo
         return result;
     }
 
