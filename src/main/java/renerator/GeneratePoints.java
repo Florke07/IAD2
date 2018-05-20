@@ -4,55 +4,42 @@ import elements.Point;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneratePoints {
 
     private Figure figure;
     private int numbersOfPointsInFigure;
+    int radius;
+    Point center;
 
-    public GeneratePoints(Figure figure, int numbersOfPointsInFigure) {
+    public GeneratePoints(Figure figure, int numbersOfPointsInFigure, int radius, Point center) {
         this.figure = figure;
         this.numbersOfPointsInFigure = numbersOfPointsInFigure;
+        this.center = center;
+        this.radius = radius;
     }
 
-    public static ArrayList<Point> Generate(Figure fig, int count){
+    public ArrayList<Point> Generate(){
         Random rng = new Random();
         ArrayList<Point> points = new ArrayList<>();
 
-        switch (fig){
-            case KWADRAT://todo ruchome punkty
+        switch (figure){
+            case KWADRAT:
                 Point p1 = new Point(1,1);
                 Point p2 = new Point(5,1);
                 Point p3 = new Point(5,5);
                 Point p4 = new Point(1,5);
 
-                for (int i=0;i<count;i++){
+                for (int i=0;i<numbersOfPointsInFigure;i++){
                     points.add(new Point((rng.nextDouble()*4)+1, (rng.nextDouble()*4)+1));
                 }
                 break;
             case TROJKAT:
-                Point t1 = new Point(2,0);
-                Point t2 = new Point(-2,0);
-                Point t3 = new Point(0,2);
 
                 break;
             case OKRAG:
-                int radius = 2;
-                int iterator = 0;
-                Point center = new Point(0,0);
-                Point newPoint = new Point();
-                double distance;
-
-                while (iterator<count) {
-                    newPoint = new Point((rng.nextDouble()*4)-2,(rng.nextDouble()*4)-2);
-                    distance = dst(center, newPoint);
-
-                    if (distance <= radius) {
-                        points.add(newPoint);
-                        iterator++;
-                    }
-
-                }
+                    points = generateCircle(radius, center);
                 break;
             default:
                 break;
@@ -60,6 +47,28 @@ public class GeneratePoints {
         return points;
     }
 
+    private ArrayList<Point> generateCircle(int radius, Point center) {
+        Random rng = new Random();
+        ArrayList<Point> points = new ArrayList<>();
+        int iterator = 0;
+        Point newPoint;
+        double distance;
+
+        while (iterator<numbersOfPointsInFigure) {
+            newPoint = new Point((center.x-radius) + ((center.x+radius) - (center.x-radius)) * (rng.nextDouble()),(center.y-radius) + ((center.y+radius) - (center.y-radius)) * (rng.nextDouble()));
+            distance = dst(center, newPoint);
+            //System.out.println("Dystans= "+distance);
+            //System.out.println("nowy punkt");
+            if (distance <= radius) {
+                points.add(newPoint);
+                iterator++;
+                //System.out.println("Puknt: "+iterator);
+            }
+
+        }
+        return points;
+
+    }
     private static double dst(Point A, Point B) {
         double ans;
         ans = Math.sqrt((Math.pow((B.x-A.x),2))+(Math.pow((B.y-A.y),2)));
