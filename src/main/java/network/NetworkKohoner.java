@@ -3,7 +3,7 @@ package network;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class NetworkKonoher {
+public class NetworkKohoner {
     public ArrayList<Neuron> neurons = new ArrayList<>();
     private int numberOfInputs;
     private double lambdaMax;
@@ -13,7 +13,7 @@ public class NetworkKonoher {
     Neuron winner;
 
 
-    public NetworkKonoher(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
+    public NetworkKohoner(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
         for(int i = 0; i < numberOfNeurons;i++){
             neurons.add(new Neuron(numberOfInputs));
         }
