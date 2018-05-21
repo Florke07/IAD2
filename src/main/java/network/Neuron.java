@@ -16,7 +16,7 @@ public class Neuron implements Comparable<Neuron> {
         Random random = new Random();
         weights = new ArrayList<Double>();
         for(int i = 0;i < numberOfInputs; i++){
-            weights.add((random.nextDouble()*100)-50);
+            weights.add((random.nextDouble()*50)-25);
         }
 
         learningRateMin = 0.03;

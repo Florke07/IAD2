@@ -37,7 +37,7 @@ public class MyApp {
 
         int numOfCentre = 1;
         int numOfPoints = 500;
-        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 35);
+        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 15);
         GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
         //pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
@@ -49,7 +49,7 @@ public class MyApp {
 
         //DrawPlot.draw(ppp,5);
 
-        int epok = 100;
+        int epok = 500;
         int neu = 30;
         Kohonen nkh = new Kohonen(2,neu, epok);
 
@@ -69,7 +69,7 @@ public class MyApp {
 
                 xy.set(0,pts.get(i).x);
                 xy.set(1,pts.get(i).y);
-                nkh.work(xy,10,0.5);
+                nkh.work(xy,15,0.5);
             }
             nkh.wiek ++;
 
