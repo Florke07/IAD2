@@ -75,9 +75,9 @@ public class MyApp {
             //network.wiek--;
             //network.wiek++;
             */
-            network.work(tmp);
-        }
 
+        }
+        network.work(tmp);
         for (int i = 0; i < numbersOfNeurons; i++) {
             afterLearning[i][0] = network.neurons.get(i).weights.get(0);
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
