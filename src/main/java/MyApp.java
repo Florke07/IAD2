@@ -21,9 +21,9 @@ public class MyApp {
 
 
         Point centre = new Point(0, 0);
-        int centreRadius = 10;
+        int centreRadius = 35;
         int numbersOfCentres = 1;
-        int numberOfPointsInFigure = 500;
+        int numberOfPointsInFigure = 1000;
         int numbersOfEpoks = 100;
         int numbersOfNeurons = 10;
         double neighbourhoodRadius = 15;
@@ -46,7 +46,7 @@ public class MyApp {
 
         //pts = Generate.circled(numbersOfCentres,numberOfPointsInFigure,-50,50, 15);
         GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numberOfPointsInFigure);
-        pts = gp.Generate( centreRadius, centre);
+        pts = gp.Generate(centreRadius, centre);
 
         for (int i = 0; i < numbersOfAllPoints; i++) {
             generatedPoints[i][0] = pts.get(i).x;
@@ -65,7 +65,7 @@ public class MyApp {
         }
 
         for (int j = 0; j < numbersOfEpoks; j++) {
-            /*Collections.shuffle(pts);
+            Collections.shuffle(pts);
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
@@ -74,10 +74,10 @@ public class MyApp {
             }
             //network.wiek--;
             //network.wiek++;
-            */
-            network.work(tmp);
-        }
 
+
+        }
+        network.work(tmp);
         for (int i = 0; i < numbersOfNeurons; i++) {
             afterLearning[i][0] = network.neurons.get(i).weights.get(0);
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
