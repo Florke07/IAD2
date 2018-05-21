@@ -2,6 +2,7 @@ import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
 import network.Kohonen;
+import network.NetworkKAvg;
 import network.NetworkNG;
 import plotter.DrawPlot;
 import renerator.Figure;
@@ -39,7 +40,8 @@ public class MyApp {
 
 
         //NetworkNG network = new NetworkNG(2,numbersOfNeurons,numbersOfEpoks);
-        Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
+        //Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
+        NetworkKAvg network = new NetworkKAvg(2,numbersOfNeurons,numbersOfEpoks);
 
 
         //pts = Generate.circled(numbersOfCentres,numberOfPointsInFigure,-50,50, 15);
@@ -56,17 +58,24 @@ public class MyApp {
             neuronsBeforeLearning[i][1] = network.neurons.get(i).weights.get(1);
         }
 
+        ArrayList<Double> tmp = new ArrayList<>();
+        for (int i=0;i<pts.size();i++) {
+            tmp.add(pts.get(i).x);
+            tmp.add(pts.get(i).y);
+        }
+
         for (int j = 0; j < numbersOfEpoks; j++) {
-            Collections.shuffle(pts);
+            /*Collections.shuffle(pts);
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
-                network.work(sampleToLearn, neighbourhoodRadius, learningRate);
+                //network.work(sampleToLearn, neighbourhoodRadius, learningRate);
                 //network.work(sampleToLearn);
             }
-            network.wiek--;
+            //network.wiek--;
             //network.wiek++;
-
+            */
+            network.work(tmp);
         }
 
         for (int i = 0; i < numbersOfNeurons; i++) {

@@ -6,7 +6,7 @@ public class NetworkKAvg {
     int numberOfInputs;
     int numberOfNeurons;
     int iloscEpok;
-    ArrayList<Neuron> neurons = new ArrayList<>();
+    public ArrayList<Neuron> neurons = new ArrayList<>();
 
     public NetworkKAvg(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
         this.numberOfInputs = numberOfInputs;
