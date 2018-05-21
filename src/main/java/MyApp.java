@@ -1,6 +1,7 @@
 import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
+import network.NetworkKohoner;
 import network.NetworkNG;
 import plotter.DrawPlot;
 import renerator.Figure;
@@ -16,6 +17,11 @@ public class MyApp {
         ArrayList<Double> lista;
         lista = reader.readDouble("TestData.txt");
 
+        for (Double d:
+             lista) {
+            System.out.println(d);
+        }
+
         int ile = 10000;
         double[][] points = new double[5][5];
         points[0][0] = 1; //x pierwszego punktu
@@ -28,9 +34,9 @@ public class MyApp {
         Point c = new Point(2,3);
 
 
-        int numOfCentre = 10;
-        int numOfPoints = 100;
-        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 5);
+        int numOfCentre = 1;
+        int numOfPoints = 500;
+        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 20);
         GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
         //pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
@@ -43,10 +49,11 @@ public class MyApp {
         //DrawPlot.draw(ppp,5);
 
         int epok = 100;
-        NetworkNG nkh = new NetworkNG(2,numOfCentre, epok);
+        int neu = 30;
+        NetworkKohoner nkh = new NetworkKohoner(2,neu, epok);
 
-        double[][] przed = new double[numOfCentre][2];
-        for (int i=0;i<numOfCentre;i++) {
+        double[][] przed = new double[neu][2];
+        for (int i=0;i<neu;i++) {
             przed[i][0] = nkh.neurons.get(i).weights.get(0);
             przed[i][1] = nkh.neurons.get(i).weights.get(1);
         }
@@ -67,8 +74,8 @@ public class MyApp {
 
         }
 
-        double[][] po = new double[numOfCentre][2];
-        for (int i=0;i<numOfCentre;i++) {
+        double[][] po = new double[neu][2];
+        for (int i=0;i<neu;i++) {
             po[i][0] = nkh.neurons.get(i).weights.get(0);
             po[i][1] = nkh.neurons.get(i).weights.get(1);
         }

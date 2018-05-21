@@ -61,8 +61,8 @@ public class Kohonen {
         in.add(point.x);
         in.add(point.y);
         for (int i=0;i<neurons.size();i++){
-            if (neurons.get(i).calculatDistance(in) < neurons.get(closestIndex).calculatDistance(in))
-                closestIndex = i;
+            if (neurons.get(closestIndex).distanceToInputVector(in) > neurons.get(i).distanceToInputVector(in))
+                closestIndex=i;
         }
         return closestIndex;
     }
