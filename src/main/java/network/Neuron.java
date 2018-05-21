@@ -21,7 +21,7 @@ public class Neuron implements Comparable<Neuron> {
 
         learningRateMin = 0.03;
         do{
-            learningRateMax = 0.5;//random.nextDouble();
+            learningRateMax = 3;//random.nextDouble();
         }while(learningRateMax < learningRateMin);
         learningRate = learningRateMax;
 

@@ -3,7 +3,9 @@ import inputs.ReadData;
 import inputs.ReadFromTXT;
 import network.NetworkNG;
 import plotter.DrawPlot;
+import renerator.Figure;
 import renerator.Generate;
+import renerator.GeneratePoints;
 
 import java.util.ArrayList;
 
@@ -23,12 +25,14 @@ public class MyApp {
 
 
         ArrayList<Point> pts = new ArrayList<>();
-        //Point c = new Point(2,3);
-        //GeneratePoints gen = new GeneratePoints(Figure.OKRAG, ile, 5, c);
+        Point c = new Point(2,3);
 
-        int numOfCentre = 3;
-        int numOfPoints = 50;
+
+        int numOfCentre = 10;
+        int numOfPoints = 100;
         pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 5);
+        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
+        //pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
         double[][] ppp = new double[ile][ile];
         for (int i =0;i<ile;i++){
@@ -46,13 +50,17 @@ public class MyApp {
             przed[i][0] = nkh.neurons.get(i).weights.get(0);
             przed[i][1] = nkh.neurons.get(i).weights.get(1);
         }
+        ArrayList<Double> xy = new ArrayList<>();
 
+
+        xy.add(null);
+        xy.add(null);
         //DrawPlot.draw(ppp, przed);
         for (int j=0;j<epok;j++) {
             for (int i=0;i<(pts.size());i++) {
-                ArrayList<Double> xy = new ArrayList<>();
-                xy.add(pts.get(i).x);
-                xy.add(pts.get(i).y);
+
+                xy.set(0,pts.get(i).x);
+                xy.set(1,pts.get(i).y);
                 nkh.work(xy);
             }
             nkh.wiek ++;

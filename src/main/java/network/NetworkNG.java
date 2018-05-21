@@ -36,13 +36,15 @@ public class NetworkNG {
         }
     }
     private double funkcjaSasiedztwa(Neuron n){
-        return Math.exp(-neurons.indexOf(n)/lambdaOdWieku());
+        double tmp = Math.exp(-neurons.indexOf(n)/lambdaOdWieku());
+        //System.out.println(tmp);
+        return tmp;
     }
     private double lambdaOdWieku(){
-        return lambdaMax*Math.pow((lambdaMin/lambdaMax),(wiek/wiekMax));
+        return lambdaMax*Math.pow((lambdaMin/lambdaMax),((double) wiek/(double) wiekMax));
     }
     private double learningRateOdWieku(Neuron n){
-        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),(wiek/wiekMax));
+        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),((double)wiek/(double) wiekMax));
         return n.learningRate;
     }
     @Override
