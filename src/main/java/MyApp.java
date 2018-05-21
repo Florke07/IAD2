@@ -74,7 +74,7 @@ public class MyApp {
             }
             //network.wiek--;
             //network.wiek++;
-
+            */
 
         }
         network.work(tmp);

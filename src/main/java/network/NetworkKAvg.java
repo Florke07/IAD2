@@ -21,24 +21,25 @@ public class NetworkKAvg {
         ArrayList<Double> tmp = new ArrayList<>();
         tmp.add(null);
         tmp.add(null);
-        Neuron najblizszy;
-        int naj = 0;
+        int naj;
         for (int i = 0; i < in.size(); i = i + 2) {
             tmp.set(0, in.get(i));
             tmp.set(1, in.get(i + 1));
             for (Neuron j : neurons) {
                 j.distanceToInputVector(tmp);
             }
+            naj = 0;
             for (Neuron j : neurons) {
-                najblizszy = j;
-                naj = neurons.indexOf(najblizszy);
-                if (j.distance < najblizszy.distance) {
-                    najblizszy = j;
-                    naj = neurons.indexOf(najblizszy);
+                //naj = neurons.indexOf(j);
+                if (j.distance < neurons.get(naj).distance) {
+                    naj = neurons.indexOf(j);
+
                 }
             }
             neurons.get(naj).points.add(tmp.get(0));
             neurons.get(naj).points.add(tmp.get(1));
+            //System.out.println(neurons.get(naj).points.size());
+            //System.out.println(naj);
         }
     }
 
@@ -50,10 +51,12 @@ public class NetworkKAvg {
                 xAvg += i.points.get(j);
                 yAvg += i.points.get(j + 1);
             }
-            xAvg /= (i.points.size() / 2);
-            yAvg /= (i.points.size() / 2);
-            i.weights.set(0, xAvg);
-            i.weights.set(1, yAvg);
+            if(i.points.size() != 0) {
+                xAvg = xAvg / (i.points.size() / 2.0);
+                yAvg = yAvg / (i.points.size() / 2.0);
+                i.weights.set(0, xAvg);
+                i.weights.set(1, yAvg);
+            }
         }
     }
 
