@@ -21,9 +21,9 @@ public class Generate {
             int y = rng.nextInt((rangeMax - rangeMin)+1)+rangeMin;
             //System.out.println("Radius: "+radius+" X: "+x+" Y: "+y);
             Point center = new Point(x,y);
-            GeneratePoints gp = new GeneratePoints(Figure.OKRAG,numbersOfPointsInFigure,radius,center);
+            GeneratePoints gp = new GeneratePoints(Figure.OKRAG,numbersOfPointsInFigure);
             ArrayList<Point> pts = new ArrayList<>();
-            pts = gp.Generate();
+            pts = gp.Generate(radius,center);
             points.addAll(pts);
         }
         return points;

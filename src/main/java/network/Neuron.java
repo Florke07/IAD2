@@ -15,29 +15,31 @@ public class Neuron implements Comparable<Neuron> {
     Neuron(int numberOfInputs) {
         Random random = new Random();
         weights = new ArrayList<Double>();
-        for(int i = 0;i < numberOfInputs; i++){
-            weights.add((random.nextDouble()*30)-15);
+        for (int i = 0; i < numberOfInputs; i++) {
+            weights.add((random.nextDouble() * 30) - 15);
         }
 
         learningRateMin = 0.03;
-        do{
+        do {
             learningRateMax = 3;//random.nextDouble();
-        }while(learningRateMax < learningRateMin);
+        } while (learningRateMax < learningRateMin);
         learningRate = learningRateMax;
 
     }
-    double distanceToInputVector(ArrayList<Double> in){
+
+    double distanceToInputVector(ArrayList<Double> in) {
         distance = 0;
-        for(int i = 0;i < weights.size();i++){
-            distance += Math.pow(weights.get(i)-in.get(i),2);
+        for (int i = 0; i < weights.size(); i++) {
+            distance += Math.pow(weights.get(i) - in.get(i), 2);
         }
         distance = Math.sqrt(distance);
         return distance;
     }
-    double distanceToOtherNeuron(Neuron n){
+
+    double distanceToOtherNeuron(Neuron n) {
         double tmp = 0;
-        for(int i = 0;i < weights.size();i++){
-            tmp += Math.pow(weights.get(i)-n.weights.get(i),2);
+        for (int i = 0; i < weights.size(); i++) {
+            tmp += Math.pow(weights.get(i) - n.weights.get(i), 2);
         }
         tmp = Math.sqrt(tmp);
         return tmp;
@@ -45,12 +47,12 @@ public class Neuron implements Comparable<Neuron> {
 
     @Override
     public int compareTo(Neuron o) {
-        if(this.distance<o.distance)
+        if (this.distance < o.distance)
             //return -1;
-            return (int)(-(o.distance-this.distance));
-        else if(o.distance<this.distance)
+            return (int) (-(o.distance - this.distance));
+        else if (o.distance < this.distance)
             //return 1;
-            return (int)(-(o.distance-this.distance));
+            return (int) (-(o.distance - this.distance));
         return 0;
     }
 

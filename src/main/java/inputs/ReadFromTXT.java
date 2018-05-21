@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class ReadFromTXT implements ReadData{
+public class ReadFromTXT implements ReadData {
 
     @Override
     public ArrayList<Integer> readInt(final String pathToFile) {
@@ -46,9 +46,8 @@ public class ReadFromTXT implements ReadData{
             scan = new Scanner(file);
             scan.useDelimiter("[,\n]").useLocale(Locale.US);
 
-            while(scan.hasNextDouble())
-            {
-                list.add( scan.nextDouble() );
+            while (scan.hasNextDouble()) {
+                list.add(scan.nextDouble());
             }
 
         } catch (FileNotFoundException e1) {
