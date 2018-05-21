@@ -36,10 +36,10 @@ public class NetworkKonoher {
         return Math.exp(-Math.abs(n.distanceToOtherNeuron(winner))/(2*Math.pow(lambdaOdWieku(),2)));
     }
     private double lambdaOdWieku(){
-        return lambdaMax*Math.pow((lambdaMin/lambdaMax),(wiek/wiekMax));
+        return lambdaMax*Math.pow((lambdaMin/lambdaMax),((double) wiek/(double)wiekMax));
     }
     private double learningRateOdWieku(Neuron n){
-        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),(wiek/wiekMax));
+        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),((double) wiek/(double)wiekMax));
         return n.learningRate;
     }
     @Override
