@@ -44,7 +44,7 @@ public class NetworkKonoher {
     }
     @Override
     public String toString() {
-        return "NetworkGN{" +
+        return "NetworkNG{" +
                 "neurons=" + neurons +
                 '}';
     }

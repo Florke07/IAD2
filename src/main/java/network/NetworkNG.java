@@ -3,14 +3,14 @@ package network;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class NetworkGN {
-    private ArrayList<Neuron> neurons = new ArrayList<Neuron>();
-    private int numberOfInputs;
-    private double lambdaMax;
-    private double lambdaMin;
-    private int wiek;
+public class NetworkNG {
+    public ArrayList<Neuron> neurons = new ArrayList<Neuron>();
+    public int numberOfInputs;
+    public double lambdaMax;
+    public double lambdaMin;
+    public int wiek;
     private int wiekMax;
-    public NetworkGN(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
+    public NetworkNG(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
         for(int i = 0; i < numberOfNeurons;i++){
             neurons.add(new Neuron(numberOfInputs));
         }
@@ -29,12 +29,11 @@ public class NetworkGN {
     }
     public void work(ArrayList<Double> in){
         sort(in);
-        for(Neuron i : neurons){
-            for(int j = 0;j <numberOfInputs;j++){
-                i.weights.set(j,(i.weights.get(j)+learningRateOdWieku(i)*funkcjaSasiedztwa(i)*(in.get(j)-i.weights.get(j))));
+        for(Neuron i : neurons) {
+            for (int j = 0; j < numberOfInputs; j++) {
+                i.weights.set(j, (i.weights.get(j) + learningRateOdWieku(i) * funkcjaSasiedztwa(i) * (in.get(j) - i.weights.get(j))));
             }
         }
-        wiek++;
     }
     private double funkcjaSasiedztwa(Neuron n){
         return Math.exp(-neurons.indexOf(n)/lambdaOdWieku());
@@ -48,7 +47,7 @@ public class NetworkGN {
     }
     @Override
     public String toString() {
-        return "NetworkGN{" +
+        return "NetworkNG{" +
                 "neurons=" + neurons +
                 '}';
     }

@@ -1,16 +1,10 @@
-import com.panayotis.gnuplot.JavaPlot;
-import com.panayotis.gnuplot.plot.DataSetPlot;
-import com.panayotis.gnuplot.utils.Debug;
 import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
-import network.NetworkKonoher;
+import network.NetworkNG;
 import plotter.DrawPlot;
-import renerator.Figure;
 import renerator.Generate;
-import renerator.GeneratePoints;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class MyApp {
@@ -45,7 +39,7 @@ public class MyApp {
         //DrawPlot.draw(ppp,5);
 
         int epok = 100;
-        NetworkKonoher nkh = new NetworkKonoher(2,numOfCentre, epok);
+        NetworkNG nkh = new NetworkNG(2,numOfCentre, epok);
 
         double[][] przed = new double[numOfCentre][2];
         for (int i=0;i<numOfCentre;i++) {
