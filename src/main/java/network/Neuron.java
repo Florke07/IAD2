@@ -10,7 +10,7 @@ public class Neuron implements Comparable<Neuron> {
     public double learningRate;
     public double learningRateMin;
     double distance = 0;
-
+    public ArrayList<Double> points = new ArrayList<>();
 
     Neuron(int numberOfInputs) {
         Random random = new Random();
