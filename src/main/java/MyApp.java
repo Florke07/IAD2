@@ -10,6 +10,7 @@ import renerator.Generate;
 import renerator.GeneratePoints;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MyApp {
     public static void main(final String[] args) {
@@ -52,6 +53,7 @@ public class MyApp {
         int epok = 500;
         int neu = 30;
         Kohonen nkh = new Kohonen(2,neu, epok);
+        //NetworkNG nkh = new NetworkNG(2,neu,epok);
 
         double[][] przed = new double[neu][2];
         for (int i=0;i<neu;i++) {
@@ -65,13 +67,15 @@ public class MyApp {
         xy.add(null);
         //DrawPlot.draw(ppp, przed);
         for (int j=0;j<epok;j++) {
+            Collections.shuffle(pts);
             for (int i=0;i<(pts.size());i++) {
 
                 xy.set(0,pts.get(i).x);
                 xy.set(1,pts.get(i).y);
                 nkh.work(xy,15,0.5);
+                //nkh.work(xy);
             }
-            nkh.wiek ++;
+            nkh.wiek--;
 
         }
 
