@@ -26,8 +26,8 @@ public class MyApp {
         int numberOfPointsInFigure = 1000;
         int numbersOfEpoks = 100;
         int numbersOfNeurons = 10;
-        double neighbourhoodRadius = 15;
-        double learningRate = 0.7;
+        double neighbourhoodRadius = 1;
+        double learningRate = 0.01;
 
 
         int numbersOfAllPoints = numbersOfCentres * numberOfPointsInFigure;
@@ -40,8 +40,8 @@ public class MyApp {
 
 
         //NetworkNG network = new NetworkNG(2,numbersOfNeurons,numbersOfEpoks);
-        //Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
-        NetworkKAvg network = new NetworkKAvg(2,numbersOfNeurons,numbersOfEpoks);
+        Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
+        //NetworkKAvg network = new NetworkKAvg(2,numbersOfNeurons,numbersOfEpoks);
 
 
         //pts = Generate.circled(numbersOfCentres,numberOfPointsInFigure,-50,50, 15);
@@ -69,21 +69,21 @@ public class MyApp {
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
-                //network.work(sampleToLearn, neighbourhoodRadius, learningRate);
+                network.work(sampleToLearn, neighbourhoodRadius, learningRate);
                 //network.work(sampleToLearn);
             }
-            //network.wiek--;
+            network.wiek--;
             //network.wiek++;
-            */
+
 
         }
-        network.work(tmp);
+        //network.work(tmp);
         for (int i = 0; i < numbersOfNeurons; i++) {
             afterLearning[i][0] = network.neurons.get(i).weights.get(0);
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
         }
 
-        DrawPlot.draw(generatedPoints, neuronsBeforeLearning);
+        //DrawPlot.draw(generatedPoints, neuronsBeforeLearning);
         DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning);
 
         //System.out.println(network.error(pts));
