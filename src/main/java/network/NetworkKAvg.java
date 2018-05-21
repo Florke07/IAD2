@@ -3,9 +3,9 @@ package network;
 import java.util.ArrayList;
 
 public class NetworkKAvg {
-    int numberOfInputs;
-    int numberOfNeurons;
-    int iloscEpok;
+    public int numberOfInputs;
+    public int numberOfNeurons;
+    public int iloscEpok;
     public ArrayList<Neuron> neurons = new ArrayList<>();
 
     public NetworkKAvg(int numberOfInputs, int numberOfNeurons, int iloscEpok) {
