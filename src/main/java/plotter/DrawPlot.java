@@ -26,6 +26,8 @@ public class DrawPlot {
         p.addPlot(s1);
         DataSetPlot s2 = new DataSetPlot(args2);
         p.addPlot(s2);
+        p.getAxis("x").setBoundaries(-50,50);
+        p.getAxis("y").setBoundaries(-50,50);
         p.plot();
     }
 
@@ -48,6 +50,8 @@ public class DrawPlot {
         p.addPlot(s2);
         DataSetPlot s3 = new DataSetPlot(args3);
         p.addPlot(s3);
+        p.getAxis("x").setBoundaries(-50,50);
+        p.getAxis("y").setBoundaries(-50,50);
         p.plot();
     }
 }

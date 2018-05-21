@@ -30,12 +30,14 @@ public class MyApp {
 
 
         ArrayList<Point> pts = new ArrayList<>();
-        //Point c = new Point(2,3);
-        //GeneratePoints gen = new GeneratePoints(Figure.OKRAG, ile, 5, c);
+        Point c = new Point(2,3);
+
 
         int numOfCentre = 3;
-        int numOfPoints = 50;
+        int numOfPoints = 100;
         pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 5);
+        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
+        //pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
         double[][] ppp = new double[ile][ile];
         for (int i =0;i<ile;i++){
