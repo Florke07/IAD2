@@ -1,20 +1,18 @@
 package network;
 
-import elements.Point;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
 public class Kohonen {
-    ArrayList<Neuron> neurons;
+    public ArrayList<Neuron> neurons;
     int numbersOfNeurons;
     int numbersOfInputsToNeuron;
+    public double wiek;
 
-    public Kohonen(int numbersOfInputsToNeuron, int numbersOfNeurons) {
+    public Kohonen(int numbersOfInputsToNeuron, int numbersOfNeurons, double maxIter) {
         this.numbersOfNeurons = numbersOfNeurons;
         this.numbersOfInputsToNeuron = numbersOfInputsToNeuron;
         neurons = new ArrayList<>();
+        this.wiek = maxIter;
         for (int i=0;i<numbersOfNeurons;i++) {
             neurons.add(new Neuron(numbersOfInputsToNeuron));
         }
@@ -29,50 +27,34 @@ public class Kohonen {
     //todo współczynnik uczenia zależny od iteracji (liniowo)
     //todo uczenie z podziałem na fazy -> od tego zacząć
 
-    //input data -> cała tablica danych w R2
-    public void learn(ArrayList<Point> inputData, double startLearnigRate, double neighbourhoodRadius, int epoks) throws Exception {
-        if (neurons.size() == 0) throw new Exception("Empty neurons list");
-        if (inputData.size() != numbersOfInputsToNeuron) throw new Exception("Wrong input size");
-        //Faze 1.
-        learnWTM();
-        //Faze 2.
-        learnWTA(inputData, epoks, neighbourhoodRadius);
+    //input data
+    public void work(ArrayList<Double> inputData, double neighbourhoodRadius, double startLR){
+        learnWTM(inputData,neighbourhoodRadius,startLR);
 
     }
 
-    private void learnWTM() {
-
-    }
-
-    private void learnWTA(ArrayList<Point> inputData, int epoks, double neighbourhoodRadius) {
-        int curWin;
-        for (int i=0;i<inputData.size();i++) {
-            curWin = closestToPoint(inputData.get(i));
-            for (int j=0;j<numbersOfInputsToNeuron;j++) {
-                double curWeg = neurons.get(curWin).weights.get(j);
-                neurons.get(curWin).weights.set(j, (curWeg + adaptLearningRate(i,epoks,neighbourhoodRadius)));//todo
+    private void learnWTM(ArrayList<Double> inputData, double neighbourhoodRadius, double startLR) {
+        int winnerIndex = 0;
+        for (int i=0;i<numbersOfNeurons;i++) {
+            if (neurons.get(i).distanceToInputVector(inputData) < neurons.get(winnerIndex).distanceToInputVector(inputData))
+                winnerIndex = i;
+        }
+        for (int i=0;i<numbersOfNeurons;i++) {
+            if (neurons.get(winnerIndex).distanceToOtherNeuron(neurons.get(i)) <= neighbourhoodRadius) {
+                for (int j=0;j<numbersOfInputsToNeuron;j++) {
+                    double curWeight =  neurons.get(i).weights.get(j);
+                    neurons.get(i).weights.set(j, (curWeight + adaptLearningRate(i,wiek,startLR)*(inputData.get(j)-curWeight)));
+                }
             }
         }
+
     }
 
-    private int closestToPoint(Point point) {
-        int closestIndex = 0;
-        ArrayList<Double> in = new ArrayList<>();
-        in.add(point.x);
-        in.add(point.y);
-        for (int i=0;i<neurons.size();i++){
-            if (neurons.get(closestIndex).distanceToInputVector(in) > neurons.get(i).distanceToInputVector(in))
-                closestIndex=i;
-        }
-        return closestIndex;
-    }
 
-    private double adaptLearningRate(int currentIteration, int maxIteration, double startLearningRate) {
+
+    private double adaptLearningRate(double currentIteration, double maxIteration, double startLearningRate) {
         //liniowe zmniejszanie
         return startLearningRate*((maxIteration-currentIteration)/maxIteration);
     }
 
-    private double neighbourhoodFunction(Neuron current, Neuron winner, double promienSasiedzctwa) {
-        return Math.exp(-(current.distanceToOtherNeuron(winner))/(2*promienSasiedzctwa*promienSasiedzctwa));
-    }
 }

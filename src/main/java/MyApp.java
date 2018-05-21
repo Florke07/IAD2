@@ -1,6 +1,7 @@
 import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
+import network.Kohonen;
 import network.NetworkKohoner;
 import network.NetworkNG;
 import plotter.DrawPlot;
@@ -17,10 +18,10 @@ public class MyApp {
         ArrayList<Double> lista;
         lista = reader.readDouble("TestData.txt");
 
-        for (Double d:
+        /* for (Double d:
              lista) {
             System.out.println(d);
-        }
+        }*/
 
         int ile = 10000;
         double[][] points = new double[5][5];
@@ -36,7 +37,7 @@ public class MyApp {
 
         int numOfCentre = 1;
         int numOfPoints = 500;
-        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 20);
+        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 35);
         GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
         //pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
@@ -50,7 +51,7 @@ public class MyApp {
 
         int epok = 100;
         int neu = 30;
-        NetworkKohoner nkh = new NetworkKohoner(2,neu, epok);
+        Kohonen nkh = new Kohonen(2,neu, epok);
 
         double[][] przed = new double[neu][2];
         for (int i=0;i<neu;i++) {
@@ -68,7 +69,7 @@ public class MyApp {
 
                 xy.set(0,pts.get(i).x);
                 xy.set(1,pts.get(i).y);
-                nkh.work(xy);
+                nkh.work(xy,10,0.5);
             }
             nkh.wiek ++;
 
