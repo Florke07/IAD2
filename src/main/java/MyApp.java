@@ -17,20 +17,21 @@ public class MyApp {
         ArrayList<Double> lista;
         lista = reader.readDouble("TestData.txt");
 
-        ArrayList<Point> pts;
+        ArrayList<Point> pts = new ArrayList<>();
 
 
         Point centre = new Point(0, 0);
-        int centreRadius = 35;
+        int centreRadius = 10;
         int numbersOfCentres = 1;
-        int numberOfPointsInFigure = 1000;
+        int numberOfPointsInFigure = 500;
         int numbersOfEpoks = 100;
         int numbersOfNeurons = 10;
         double neighbourhoodRadius = 1;
         double learningRate = 0.01;
 
 
-        int numbersOfAllPoints = numbersOfCentres * numberOfPointsInFigure;
+        //int numbersOfAllPoints = numbersOfCentres * numberOfPointsInFigure;
+        int numbersOfAllPoints = 1000;
         ArrayList<Double> sampleToLearn = new ArrayList<>();
         sampleToLearn.add(null);
         sampleToLearn.add(null);
@@ -45,34 +46,43 @@ public class MyApp {
 
 
         //pts = Generate.circled(numbersOfCentres,numberOfPointsInFigure,-50,50, 15);
-        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numberOfPointsInFigure);
-        pts = gp.Generate(centreRadius, centre);
-
+        //GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numberOfPointsInFigure);
+        //pts = gp.Generate( centreRadius, centre);
+        int k=0;
+        for (int i=0;i<numbersOfAllPoints;i+=2) {
+            generatedPoints[k][0] = lista.get(i);
+            generatedPoints[k][1] = lista.get(i+1);
+            k++;
+        }
+        for (int i=0;i<numbersOfAllPoints;i+=2) {
+            pts.add(new Point(lista.get(i), lista.get(i+1)));
+        }
+        /*
         for (int i = 0; i < numbersOfAllPoints; i++) {
             generatedPoints[i][0] = pts.get(i).x;
             generatedPoints[i][1] = pts.get(i).y;
-        }
+        }*/
 
         for (int i = 0; i < numbersOfNeurons; i++) {
             neuronsBeforeLearning[i][0] = network.neurons.get(i).weights.get(0);
             neuronsBeforeLearning[i][1] = network.neurons.get(i).weights.get(1);
         }
-
+        /*
         ArrayList<Double> tmp = new ArrayList<>();
         for (int i=0;i<pts.size();i++) {
             tmp.add(pts.get(i).x);
             tmp.add(pts.get(i).y);
-        }
-
+        }*/
+        //network.work(tmp);
         for (int j = 0; j < numbersOfEpoks; j++) {
             Collections.shuffle(pts);
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
-                network.work(sampleToLearn, neighbourhoodRadius, learningRate);
+                //network.work(sampleToLearn, neighbourhoodRadius, learningRate);
                 //network.work(sampleToLearn);
             }
-            network.wiek--;
+            //network.wiek--;
             //network.wiek++;
 
 
