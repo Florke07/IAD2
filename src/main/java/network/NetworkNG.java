@@ -44,7 +44,7 @@ public class NetworkNG {
         return lambdaMax*Math.pow((lambdaMin/lambdaMax),((double) wiek/(double) wiekMax));
     }
     private double learningRateOdWieku(Neuron n){
-        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),((double)wiek/(double) wiekMax));
+        n.learningRate = n.learningRateMax*Math.pow((n.learningRateMin/n.learningRate),((double) wiek/(double) wiekMax));
         return n.learningRate;
     }
     @Override
