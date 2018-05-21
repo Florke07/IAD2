@@ -33,14 +33,14 @@ public class MyApp {
 
 
         ArrayList<Point> pts = new ArrayList<>();
-        Point c = new Point(2,3);
+        Point c = new Point(0,0);
 
 
         int numOfCentre = 1;
         int numOfPoints = 500;
-        pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 15);
-        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 5, c);
-        //pts = gp.Generate();
+        //pts = Generate.circled(numOfCentre,numOfPoints,-50,50, 15);
+        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numOfPoints, 10, c);
+        pts = gp.Generate();
         ile = numOfCentre*numOfPoints;
         double[][] ppp = new double[ile][ile];
         for (int i =0;i<ile;i++){
@@ -50,8 +50,8 @@ public class MyApp {
 
         //DrawPlot.draw(ppp,5);
 
-        int epok = 500;
-        int neu = 30;
+        int epok = 100;
+        int neu = 10;
         Kohonen nkh = new Kohonen(2,neu, epok);
         //NetworkNG nkh = new NetworkNG(2,neu,epok);
 
