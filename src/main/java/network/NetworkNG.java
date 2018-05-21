@@ -23,7 +23,7 @@ public class NetworkNG {
     }
     private void sort(ArrayList<Double> in){
         for(Neuron i : neurons){
-            i.calculatDistance(in);
+            i.distanceToInputVector(in);
         }
         Collections.sort(neurons);
     }
