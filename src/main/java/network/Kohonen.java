@@ -1,12 +1,16 @@
 package network;
 
+import elements.Point;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Kohonen {
     public ArrayList<Neuron> neurons;
     int numbersOfNeurons;
     int numbersOfInputsToNeuron;
     public double wiek;
+    private double MWiek;
 
 
     public Kohonen(int numbersOfInputsToNeuron, int numbersOfNeurons, double maxIter) {
@@ -14,14 +18,34 @@ public class Kohonen {
         this.numbersOfInputsToNeuron = numbersOfInputsToNeuron;
         neurons = new ArrayList<>();
         this.wiek = maxIter;
-
+        MWiek = maxIter;
         for (int i=0;i<numbersOfNeurons;i++) {
             neurons.add(new Neuron(numbersOfInputsToNeuron));
         }
 
     }
 
+    public double error(ArrayList<Point> pts) {
 
+        double sum=0;
+
+        ArrayList<Point> neuronsToPts = new ArrayList<>();
+        for (int i=0;i<numbersOfNeurons;i+=2) {
+            neuronsToPts.add(new Point(neurons.get(i).weights.get(0), neurons.get(i+1).weights.get(1)));
+        }
+        for (int i=0;i<pts.size();i++) {
+            sum+=onePoint(pts.get(i), neuronsToPts);
+        }
+        return (sum/pts.size());
+    }
+
+    private double onePoint(Point pt, ArrayList<Point> neu) {
+        ArrayList<Double> result = new ArrayList<>();
+        for (int i=0;i<neu.size();i++) {
+            result.add(pt.distance(neu.get(i)));
+        }
+        return Collections.min(result);
+    }
     //input data
     public void work(ArrayList<Double> inputData, double neighbourhoodRadius, double startLR){
         learnWTM(inputData,neighbourhoodRadius,startLR);
@@ -39,7 +63,7 @@ public class Kohonen {
             if (neurons.get(winnerIndex).distanceToOtherNeuron(neurons.get(i)) <= rad(i,maxRad,wiek)) {
                 for (int j=0;j<numbersOfInputsToNeuron;j++) {
                     double curWeight =  neurons.get(i).weights.get(j);
-                    neurons.get(i).weights.set(j, (curWeight + adaptLearningRate(i,wiek,startLR)*neighbourhoodFunction(neurons.get(winnerIndex),neurons.get(i),startLR,i,wiek)*(inputData.get(j)-curWeight)));
+                    neurons.get(i).weights.set(j, (curWeight + adaptLearningRate(i,MWiek,startLR)*neighbourhoodFunction(neurons.get(winnerIndex),neurons.get(i),startLR,i,MWiek)*(inputData.get(j)-curWeight)));
                     //neurons.get(i).weights.set(j, (curWeight + adaptLearningRate(i,wiek,startLR)*(inputData.get(j)-curWeight)));
 
                 }

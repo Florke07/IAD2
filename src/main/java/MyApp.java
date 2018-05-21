@@ -87,5 +87,7 @@ public class MyApp {
 
         DrawPlot.draw(ppp,przed);
         DrawPlot.draw(ppp,przed,po);
+
+        System.out.println(nkh.error(pts));
     }
 }
