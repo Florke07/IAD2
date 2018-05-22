@@ -2,16 +2,13 @@ import elements.Point;
 import inputs.ReadData;
 import inputs.ReadFromTXT;
 import network.Kohonen;
-import network.NetworkKAvg;
 import network.NetworkNG;
 import plotter.DrawPlot;
-import renerator.Figure;
-import renerator.GeneratePoints;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MyApp {
+public class MyAppNG {
     public static void main(final String[] args) {
         ReadData reader = new ReadFromTXT();
         ArrayList<Double> lista;
@@ -19,10 +16,9 @@ public class MyApp {
 
         ArrayList<Point> pts = new ArrayList<>();
 
-
         int numbersOfCentres = 1;
         int numberOfPointsInFigure = 2000;
-        int numbersOfEpoks = 100;
+        int numbersOfEpoks = 5;
         int numbersOfNeurons = 20;
         double neighbourhoodRadius = 10;
         double learningRate = 0.5;
@@ -36,7 +32,8 @@ public class MyApp {
         double[][] neuronsBeforeLearning = new double[numbersOfNeurons][2];
         double[][] afterLearning = new double[numbersOfNeurons][2];
 
-        Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
+
+        NetworkNG network = new NetworkNG(2,numbersOfNeurons,numbersOfEpoks);
 
 
         for (int i=0;i<lista.size();i+=2) {
@@ -58,10 +55,11 @@ public class MyApp {
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
-                network.work(sampleToLearn, neighbourhoodRadius, learningRate);
+                network.work(sampleToLearn);
 
             }
-            network.wiek--;
+            network.wiek++;
+
         }
 
         for (int i = 0; i < numbersOfNeurons; i++) {
@@ -69,6 +67,7 @@ public class MyApp {
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
         }
 
+        //DrawPlot.draw(generatedPoints, neuronsBeforeLearning);
         DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning);
 
     }
