@@ -16,12 +16,12 @@ public class Neuron implements Comparable<Neuron> {
         Random random = new Random();
         weights = new ArrayList<Double>();
         for (int i = 0; i < numberOfInputs; i++) {
-            weights.add((random.nextDouble() * 90) - 45);
+            weights.add((random.nextDouble() * 20) - 10);
         }
 
         learningRateMin = 0.03;
         do {
-            learningRateMax = 3;//random.nextDouble();
+            learningRateMax = 0.5;//random.nextDouble();
         } while (learningRateMax < learningRateMin);
         learningRate = learningRateMax;
 
@@ -48,11 +48,9 @@ public class Neuron implements Comparable<Neuron> {
     @Override
     public int compareTo(Neuron o) {
         if (this.distance < o.distance)
-            //return -1;
-            return (int) (-(o.distance - this.distance));
+            return -1;
         else if (o.distance < this.distance)
-            //return 1;
-            return (int) (-(o.distance - this.distance));
+            return 1;
         return 0;
     }
 

@@ -62,7 +62,7 @@ public class DrawPlot {
         style2.setPointType(5);
         style2.setPointSize(1);
         PlotStyle style3 = new PlotStyle(Style.POINTS);
-        style3.setPointSize(3);
+        style3.setPointSize(2);
         style3.setPointType(7);
         DataSetPlot s1 = new DataSetPlot(args1);
         s1.setPlotStyle(style);
@@ -73,8 +73,8 @@ public class DrawPlot {
         DataSetPlot s3 = new DataSetPlot(args3);
         s3.setPlotStyle(style3);
         p.addPlot(s3);
-        p.getAxis("x").setBoundaries(-50, 50);
-        p.getAxis("y").setBoundaries(-50, 50);
+        p.getAxis("x").setBoundaries(-15, 15);
+        p.getAxis("y").setBoundaries(-15, 15);
         p.plot();
     }
 }

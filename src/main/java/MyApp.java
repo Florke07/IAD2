@@ -17,17 +17,17 @@ public class MyApp {
         ArrayList<Double> lista;
         lista = reader.readDouble("TestData.txt");
 
-        ArrayList<Point> pts;
+        ArrayList<Point> pts = new ArrayList<>();
 
 
         Point centre = new Point(0, 0);
         int centreRadius = 35;
         int numbersOfCentres = 1;
-        int numberOfPointsInFigure = 1000;
-        int numbersOfEpoks = 90;
-        int numbersOfNeurons = 10;
-        double neighbourhoodRadius = 500;
-        double learningRate = 0.01;
+        int numberOfPointsInFigure = 2000;
+        int numbersOfEpoks = 5;
+        int numbersOfNeurons = 20;
+        double neighbourhoodRadius = 10;
+        double learningRate = 0.5;
 
 
         int numbersOfAllPoints = numbersOfCentres * numberOfPointsInFigure;
@@ -39,14 +39,18 @@ public class MyApp {
         double[][] afterLearning = new double[numbersOfNeurons][2];
 
 
-        //NetworkNG network = new NetworkNG(2,numbersOfNeurons,numbersOfEpoks);
-        Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
+        NetworkNG network = new NetworkNG(2,numbersOfNeurons,numbersOfEpoks);
+        //Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
         //NetworkKAvg network = new NetworkKAvg(2,numbersOfNeurons,numbersOfEpoks);
 
 
         //pts = Generate.circled(numbersOfCentres,numberOfPointsInFigure,-50,50, 15);
-        GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numberOfPointsInFigure);
-        pts = gp.Generate(centreRadius, centre);
+        //GeneratePoints gp = new GeneratePoints(Figure.OKRAG, numberOfPointsInFigure);
+        //pts = gp.Generate(centreRadius, centre);
+
+        for (int i=0;i<lista.size();i+=2) {
+            pts.add(new Point(lista.get(i), lista.get(i+1)));
+        }
 
         for (int i = 0; i < numbersOfAllPoints; i++) {
             generatedPoints[i][0] = pts.get(i).x;
@@ -69,15 +73,17 @@ public class MyApp {
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
-                network.work(sampleToLearn, neighbourhoodRadius, learningRate);
-                //network.work(sampleToLearn);
-            }
-            network.wiek--;
-            //network.wiek++;
+                //network.work(sampleToLearn, neighbourhoodRadius, learningRate);
+                network.work(sampleToLearn);
 
+            }
+            //network.wiek--;
+            network.wiek++;
 
         }
-        //network.work(tmp);
+
+        network.work(lista);
+
         for (int i = 0; i < numbersOfNeurons; i++) {
             afterLearning[i][0] = network.neurons.get(i).weights.get(0);
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
