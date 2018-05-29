@@ -22,9 +22,9 @@ public class MyApp {
 
         int numbersOfCentres = 1;
         int numberOfPointsInFigure = 2000;
-        int numbersOfEpoks = 100;
-        int numbersOfNeurons = 20;
-        double neighbourhoodRadius = 10;
+        int numbersOfEpoks = 30;
+        int numbersOfNeurons = 80;
+        double neighbourhoodRadius = 12;
         double learningRate = 0.5;
 
 
@@ -39,7 +39,7 @@ public class MyApp {
         Kohonen network = new Kohonen(2, numbersOfNeurons, numbersOfEpoks);
 
 
-        for (int i=0;i<lista.size();i+=2) {
+        for (int i=0;i<numberOfPointsInFigure*2;i+=2) {
             pts.add(new Point(lista.get(i), lista.get(i+1)));
         }
 
@@ -54,13 +54,23 @@ public class MyApp {
         }
 
         for (int j = 0; j < numbersOfEpoks; j++) {
-            Collections.shuffle(pts);
+            //Collections.shuffle(pts);
+            DrawPlot.draw(generatedPoints, neuronsBeforeLearning, "/home/pobi/plots/kohonen/aplt.png");
             for (int i = 0; i < (pts.size()); i++) {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
                 network.work(sampleToLearn, neighbourhoodRadius, learningRate);
 
+                for (int k = 0; k < numbersOfNeurons; k++) {
+                    afterLearning[k][0] = network.neurons.get(k).weights.get(0);
+                    afterLearning[k][1] = network.neurons.get(k).weights.get(1);
+                }
+
             }
+            if (j <= 9) {
+                DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning, "/home/pobi/plots/kohonen/plt0" + Integer.toString(j) + ".png");
+            } else
+                DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning, "/home/pobi/plots/kohonen/plt" + Integer.toString(j) + ".png");
             network.wiek--;
         }
 
@@ -69,6 +79,7 @@ public class MyApp {
             afterLearning[i][1] = network.neurons.get(i).weights.get(1);
         }
 
+        //DrawPlot.draw(generatedPoints, neuronsBeforeLearning);
         DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning);
 
     }

@@ -61,7 +61,7 @@ public class Kohonen {
                 winnerIndex = i;
         }
         for (int i = 0; i < numbersOfNeurons; i++) {
-            if (neurons.get(winnerIndex).distanceToOtherNeuron(neurons.get(i)) <= rad(i, maxRad, wiek)) {
+            if (neurons.get(winnerIndex).distanceToOtherNeuron(neurons.get(i)) <= adaptRadius(i, maxRad, wiek)) {
                 for (int j = 0; j < numbersOfInputsToNeuron; j++) {
                     double curWeight = neurons.get(i).weights.get(j);
                     neurons.get(i).weights.set(j, (curWeight + adaptLearningRate(i, MWiek, startLR) * neighbourhoodFunction(neurons.get(winnerIndex), neurons.get(i), startLR, i, MWiek) * (inputData.get(j) - curWeight)));
@@ -78,7 +78,7 @@ public class Kohonen {
         return Math.exp(-Math.pow(current.distanceToOtherNeuron(winner), 2) / (2 * Math.pow(radius, 2)));
     }
 
-    private double rad(double currentIter, double maxradius, double maxIter) {
+    private double adaptRadius(double currentIter, double maxradius, double maxIter) {
         return maxradius * ((maxIter - currentIter) / maxIter);
     }
 

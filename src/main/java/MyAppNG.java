@@ -19,7 +19,7 @@ public class MyAppNG {
         int numbersOfCentres = 1;
         int numberOfPointsInFigure = 2000;
         int numbersOfEpoks = 5;
-        int numbersOfNeurons = 20;
+        int numbersOfNeurons = 100;
         double neighbourhoodRadius = 10;
         double learningRate = 0.5;
 
@@ -56,10 +56,16 @@ public class MyAppNG {
                 sampleToLearn.set(0, pts.get(i).x);
                 sampleToLearn.set(1, pts.get(i).y);
                 network.work(sampleToLearn);
-
+                for (int k = 0; k < numbersOfNeurons; k++) {
+                    afterLearning[k][0] = network.neurons.get(k).weights.get(0);
+                    afterLearning[k][1] = network.neurons.get(k).weights.get(1);
+                }
             }
             network.wiek++;
-
+            if (j <= 9) {
+                DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning, "/home/pobi/plots/gaz/plt0" + Integer.toString(j) + ".png");
+            } else
+                DrawPlot.draw(generatedPoints, neuronsBeforeLearning, afterLearning, "/home/pobi/plots/gaz/plt" + Integer.toString(j) + ".png");
         }
 
         for (int i = 0; i < numbersOfNeurons; i++) {
